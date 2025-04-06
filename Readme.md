@@ -37,8 +37,8 @@ ilo.example.com,admin,password123,true,true
 ```bash
 docker-compose up --scale celery_worker=3  --build      #replace no of workers as per requirement
 ```
-## TO initialize concurrency update docker-compose.yml in the celery_beat section.
-# Eg. celery -A tasks beat --loglevel=info --concurrency=50   (replace with actual concurrency as per requirement).
+# TO initialize concurrency update docker-compose.yml in the celery_beat section.
+Eg. celery -A tasks beat --loglevel=info --concurrency=50   (replace with actual concurrency as per requirement).
 
 ## Services
 
