@@ -24,8 +24,8 @@ services:
     environment:
       - CELERY_BROKER_URL=redis://redis:6379/0
       - CELERY_RESULT_BACKEND=redis://redis:6379/0
-      - MONGO_URI=mongodb+srv://amrindersingh:7k9pHt7LcbOa8yqB@cluster0.6ememug.mongodb.net/
-      - MONGO_DB=hpe_inventory_test
+      - MONGO_URI=${MONGO_URI}
+      - MONGO_DB=${MONGO_DB}
     depends_on:
       - redis
       - mongodb
@@ -38,8 +38,8 @@ services:
     environment:
       - CELERY_BROKER_URL=redis://redis:6379/0
       - CELERY_RESULT_BACKEND=redis://redis:6379/0
-      - MONGO_URI=mongodb+srv://amrindersingh:7k9pHt7LcbOa8yqB@cluster0.6ememug.mongodb.net/
-      - MONGO_DB=hpe_inventory_test
+      - MONGO_URI=${MONGO_URI}
+      - MONGO_DB=${MONGO_DB}
     depends_on:
       - redis
       - mongodb
