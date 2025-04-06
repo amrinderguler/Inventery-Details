@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis:6-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+  mongodb:
+    image: mongo:4.4
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    environment:
+      - MONGO_INITDB_DATABASE=hpe_inventory_test
+
+  celery_worker:
+    build: .
+    volumes:
+      - .:/app
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+      - MONGO_URI=mongodb+srv://amrindersingh:7k9pHt7LcbOa8yqB@cluster0.6ememug.mongodb.net/
+      - MONGO_DB=hpe_inventory_test
+    depends_on:
+      - redis
+      - mongodb
+
+  celery_beat:
+    build: .
+    command: celery -A tasks beat --loglevel=info --concurrency=10
+    volumes:
+      - .:/app
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+      - MONGO_URI=mongodb+srv://amrindersingh:7k9pHt7LcbOa8yqB@cluster0.6ememug.mongodb.net/
+      - MONGO_DB=hpe_inventory_test
+    depends_on:
+      - redis
+      - mongodb
+
+volumes:
+  redis_data:
+  mongodb_data: 
