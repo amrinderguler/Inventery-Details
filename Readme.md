@@ -1,8 +1,8 @@
-#HPE Server Inventory Collector
+# HPE Server Inventory Collector
 
 A Dockerized application for collecting and storing HPE server inventory data using the iLO Redfish API.
 
-##Features
+## Features
 
 - Collects comprehensive server inventory data via HPE iLO Redfish API
 - Stores data in MongoDB for easy querying and analysis
@@ -10,12 +10,12 @@ A Dockerized application for collecting and storing HPE server inventory data us
 - Redis for task queue management
 - Dockerized environment for easy deployment
 
-##Prerequisites
+## Prerequisites
 
 - Docker and Docker Compose installed
 - `.env` file with required configuration (Find attached with Mail)
 
-##Quick Start
+## Quick Start
 
 1. Clone this repository
 2. Create a `.env` file .
@@ -37,10 +37,10 @@ ilo.example.com,admin,password123,true,true
 ```bash
 docker-compose up --scale celery_worker=3  --build      #replace no of workers as per requirement
 ```
-##TO initialize concurrency update docker-compose.yml in the celery_beat section.
-#Eg. celery -A tasks beat --loglevel=info --concurrency=50   (replace with actual concurrency as per requirement).
+## TO initialize concurrency update docker-compose.yml in the celery_beat section.
+# Eg. celery -A tasks beat --loglevel=info --concurrency=50   (replace with actual concurrency as per requirement).
 
-##Services
+## Services
 
 The Docker Compose file sets up these services:
 
@@ -50,9 +50,9 @@ The Docker Compose file sets up these services:
 - **celery_beat**: Celery beat process for scheduled tasks
 
 
-##Usage
+## Usage
 
-###Collecting Data
+### Collecting Data
 
 Run the main script to collect data for all servers in your list
 
@@ -69,7 +69,7 @@ docker-compose down
 
 
 
-##Project Structure
+## Project Structure
 
 ```
 ├── api_client.py       # HPE iLO API client
@@ -82,7 +82,7 @@ docker-compose down
 └── tasks.py            # Celery tasks
 ```
 
-##Troubleshooting
+## Troubleshooting
 
 - Check logs: `docker-compose logs`
 - Verify services are running: `docker-compose ps`
